@@ -14,7 +14,7 @@ bool showCartecius = true; // Status sumbu kartesius
 void drawDonut() {
     glPushMatrix();
     GLfloat creamColor[] ={1.0f, 0.75f, 0.8f}; // Warna strawberry susu
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, creamColor); // Set warna material
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, creamColor); // parameter objek, warna dan cahaya
     glRotatef(180.0f, 1.0f, 0.0f, 0.0f); // Perputaran
     glutSolidTorus(0.2, 0.4, 32, 32);
     glPopMatrix();
@@ -27,7 +27,7 @@ void drawLolipop() {
 
     // Kepala lolipop
     GLfloat headColor[] = {1.0f, 0.0f, 0.0f}; // Warna merah kepala lolipop
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, headColor); //Parameter objek dan interaksi cahaya
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, headColor); // parameter objek, warna dan cahaya
     glTranslatef(0.0f, 0.5f, 0.0f);
     glutSolidSphere(0.4, 32, 32);
     
@@ -147,9 +147,9 @@ void drawBackground() {
     glDisable(GL_LIGHTING); // Nonaktifkan pencahayaan untuk latar belakang
 
     // Gambar lantai dengan pola kotak-kotak
-    for (float z = -10.0f; z <= 10.0f; z += 1.0f) {
+    for (float z = -10.0f; z <= 10.0f; z += 1.0f) { //nilai  rentang koordinat lantai
         for (float x = -10.0f; x <= 10.0f; x += 1.0f) {
-            if ((int)(x + z) % 2 == 0) { // Untuk menggambar elemen/objek kotak dengan pola berulang, dengan posisi berbeda x+z
+            if ((int)(x + z) % 2 == 0) { // Untuk menggambar objek kotak dengan pola berulang 2 warna 
                 glColor3f(0.7f, 0.4f, 0.2f); // Warna coklat terang
             } else {
                 glColor3f(0.6f, 0.3f, 0.1f); // Warna coklat gelap
@@ -363,5 +363,5 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(keyboard);
     glutTimerFunc(15, animasi, 0);
     glutMainLoop();
-    return 0;
+    return 0;
 }
