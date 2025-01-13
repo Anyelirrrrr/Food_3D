@@ -147,8 +147,8 @@ void drawBackground() {
 
     // Gambar lantai dengan pola kotak-kotak
     for (float z = -10.0f; z <= 10.0f; z += 1.0f) {
-        for (float x = -10.0f; x <= 10.0f; x += 1.0f) {
-            if ((int)(x + z) % 2 == 0) { 
+        for (float x = -10.0f; x <= 10.0f; x += 1.0f) { //Nilai rentang koordinat lantai
+            if ((int)(x + z) % 2 == 0) { //Modulus pengulangan 2 warna
                 glColor3f(0.7f, 0.4f, 0.2f); // Warna coklat terang
             } else {
                 glColor3f(0.6f, 0.3f, 0.1f); // Warna coklat gelap
