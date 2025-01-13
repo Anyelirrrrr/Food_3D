@@ -4,17 +4,18 @@
 //Kamilaeni
 float angle = 0.0f; // Sudut rotasi
 float rotationSpeed = 4.0f; // Kecepatan rotasi
-float cameraPosX = 3.0f; // Posisi X kamera
-float cameraPosY = 3.0f; // Posisi Y kamera
-float cameraPosZ = 3.0f; // Posisi Z kamera
+float cameraPosX = 5.0f; // Posisi X kamera
+float cameraPosY = 5.0f; // Posisi Y kamera
+float cameraPosZ = 7.0f; // Posisi Z kamera
+float scaleFactor = 1.0f; // Faktor skala objek, defaultnya 1.0 (ukuran normal)
 bool showCartecius = true; // Status sumbu kartesius
 
 // Fungsi untuk menggambar donat
 void drawDonut() {
     glPushMatrix();
     GLfloat creamColor[] ={1.0f, 0.75f, 0.8f}; // Warna strawberry susu
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, creamColor);
-    glRotatef(180.0f, 1.0f, 0.0f, 0.0f); // Balik bagian bawah
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, creamColor); // Set warna material
+    glRotatef(180.0f, 1.0f, 0.0f, 0.0f); // Perputaran
     glutSolidTorus(0.2, 0.4, 32, 32);
     glPopMatrix();
 }
@@ -22,26 +23,26 @@ void drawDonut() {
 //Anyelir
 // Fungsi untuk menggambar lolipop
 void drawLolipop() {
-    glPushMatrix();
+    glPushMatrix(); 
 
     // Kepala lolipop
     GLfloat headColor[] = {1.0f, 0.0f, 0.0f}; // Warna merah kepala lolipop
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, headColor); //Parameter permukaan objek terhadap cahaya
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, headColor);
     glTranslatef(0.0f, 0.5f, 0.0f);
     glutSolidSphere(0.4, 32, 32);
     
     // Batang lolipop	
     GLfloat stickColor[] = {0.8f, 0.8f, 0.8f}; // Warna abu-abu batang
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, stickColor);
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, stickColor); // Set warna material
     glTranslatef(0.0f, -1.0f, 0.0f);
     glScalef(0.1f, 2.0f, 0.1f); // Skala batang
-    glutSolidCube(1.0);
+    glutSolidCube(1.0); //kubus
 
     glPopMatrix();
 }
 
 // Fungsi untuk menggambar daun
-void drawLeaf() {
+void drawDaun() {
     glPushMatrix();
 
     // Warna daun hijau
@@ -50,7 +51,7 @@ void drawLeaf() {
 
     // Bentuk daun (menggunakan disk)
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f); // Posisikan daun horizontal
-    gluDisk(gluNewQuadric(), 0.0, 0.15, 32, 1);
+    gluDisk(gluNewQuadric(), 0.0, 0.15, 32, 1); //Gambar daun sbg disk/cakram/bulat
 
     glPopMatrix();
 }
@@ -71,14 +72,14 @@ void drawApple() {
     glPushMatrix();
     glTranslatef(0.0f, 0.4f, 0.0f);
     glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
-    gluCylinder(gluNewQuadric(), 0.04, 0.04, 0.3, 16, 16);
+    gluCylinder(gluNewQuadric(), 0.04, 0.04, 0.3, 16, 16); 
     glPopMatrix();
 
     // Daun apel
     glPushMatrix();
     glTranslatef(0.1f, 0.5f, 0.0f); // Posisikan daun di samping tangkai
     glRotatef(45.0f, 0.0f, 0.0f, 1.0f); // Rotasi untuk posisi daun
-    drawLeaf();
+    drawDaun();
     glPopMatrix();
 
     glPopMatrix();
@@ -107,7 +108,7 @@ void drawOrange() {
     glPushMatrix();
     glTranslatef(0.1f, 0.5f, 0.0f); // Posisikan daun di samping tangkai
     glRotatef(45.0f, 0.0f, 0.0f, 1.0f); // Rotasi untuk posisi daun
-    drawLeaf();
+    drawDaun();
     glPopMatrix();
 
     glPopMatrix();
@@ -116,7 +117,7 @@ void drawOrange() {
 //Kamilaeni
 // Fungsi untuk menggambar sumbu kartesius
 void drawCartecius() {
-    if (!showCartecius) return; // Jika showCartecius false, tidak menggambar
+    if (!showCartecius) return; // Jika showCartecius false, hilang
 
     glDisable(GL_LIGHTING); // Nonaktifkan pencahayaan untuk garis
     glBegin(GL_LINES);
@@ -147,8 +148,8 @@ void drawBackground() {
 
     // Gambar lantai dengan pola kotak-kotak
     for (float z = -10.0f; z <= 10.0f; z += 1.0f) {
-        for (float x = -10.0f; x <= 10.0f; x += 1.0f) { //Nilai rentang koordinat lantai
-            if ((int)(x + z) % 2 == 0) { //Modulus pengulangan 2 warna
+        for (float x = -10.0f; x <= 10.0f; x += 1.0f) {
+            if ((int)(x + z) % 2 == 0) { // Untuk menggambar elemen/objek kotak dengan pola berulang, dengan posisi berbeda x+z
                 glColor3f(0.7f, 0.4f, 0.2f); // Warna coklat terang
             } else {
                 glColor3f(0.6f, 0.3f, 0.1f); // Warna coklat gelap
@@ -165,7 +166,7 @@ void drawBackground() {
     GLfloat woodColor[] = {0.55f, 0.27f, 0.07f}; // Warna coklat kayu
 
     // Gambar dinding (papan kayu vertikal)
-    for (float i = -10.0f; i <= 10.0f; i += 1.0f) {
+    for (float i = -10.0f; i <= 10.0f; i += 1.0f) { 
         // Dinding belakang
         glPushMatrix();
         glTranslatef(i, 0.0f, -10.0f); // Posisi papan belakang menyentuh lantai
@@ -224,47 +225,52 @@ void display() {
     // Gambar latar belakang
     drawBackground();
 
+    
     // Gambar objek
-    glPushMatrix();
-    drawCartecius();
-
-    glPushMatrix();
-    glTranslatef(-3.0f, 0.0f, 0.0f); 
-    glRotatef(angle, 0.0f, 1.0f, 0.0f);
-    drawDonut();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslatef(-1.0f, 0.0f, 0.0f);
-    glRotatef(angle, 0.0f, 1.0f, 0.0f);
-    drawLolipop();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslatef(1.0f, 0.0f, 0.0f);
-    glRotatef(angle, 0.0f, 1.0f, 0.0f);
-    drawApple();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslatef(3.0f, 0.0f, 0.0f);
-    glRotatef(angle, 0.0f, 1.0f, 0.0f);
-    drawOrange();
-    glPopMatrix();
-
-    glPopMatrix();
-    glutSwapBuffers();
+	glPushMatrix();
+	drawCartecius();
+	
+	glPushMatrix();
+	glTranslatef(-3.0f, 0.0f, 0.0f);
+	glRotatef(angle, 0.0f, 1.0f, 0.0f);
+	glScalef(scaleFactor, scaleFactor, scaleFactor); // Terapkan skala
+	drawDonut();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(-1.0f, 0.0f, 0.0f);
+	glRotatef(angle, 0.0f, 1.0f, 0.0f);
+	glScalef(scaleFactor, scaleFactor, scaleFactor); // Terapkan skala
+	drawLolipop();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(1.0f, 0.0f, 0.0f);
+	glRotatef(angle, 0.0f, 1.0f, 0.0f);
+	glScalef(scaleFactor, scaleFactor, scaleFactor); // Terapkan skala
+	drawApple();
+	glPopMatrix();
+	
+	glPushMatrix();
+	glTranslatef(3.0f, 0.0f, 0.0f);
+	glRotatef(angle, 0.0f, 1.0f, 0.0f);
+	glScalef(scaleFactor, scaleFactor, scaleFactor); // Terapkan skala
+	drawOrange();
+	glPopMatrix();
+	
+	glPopMatrix();
+	glutSwapBuffers();
 }
 
 //Anyelir
-// Fungsi untuk memperbarui animasi
-void update(int value) {
+// Fungsi untuk memperbarui animasi saat berputar
+void animasi(int value) {
     angle += rotationSpeed; // Tambah sudut rotasi
     if (angle > 360.0f) {
         angle -= 360.0f;
     }
     glutPostRedisplay(); // Meminta redisplay
-    glutTimerFunc(16, update, 0); // Memanggil fungsi ini lagi setelah 16 ms
+    glutTimerFunc(15, animasi, 0); // Memanggil fungsi ini lagi setelah 16 ms
 }
 
 //Kamilaeni
@@ -283,8 +289,22 @@ void keyboard(unsigned char key, int x, int y) {
         case 'd': // Kanan
             cameraPosX += 0.1f;
             break;
+        case 'q': // Naik
+            cameraPosY += 0.1f;
+            break;
+        case 'e': // Turun
+            cameraPosY -= 0.1f;
+            break;
         case 'c': // Toggle visibilitas sumbu kartesius
             showCartecius = !showCartecius;
+            break;
+        case 'z': // Perbesar objek
+            scaleFactor += 0.1f;
+            break;
+        case 'x': // Perkecil objek
+            if (scaleFactor > 0.1f) { // Jangan biarkan skala menjadi terlalu kecil
+                scaleFactor -= 0.1f;
+            }
             break;
         case 27: // Tombol ESC untuk keluar
             exit(0);
@@ -298,17 +318,16 @@ void keyboard(unsigned char key, int x, int y) {
 //Anyelir
 // Inisialisasi
 void init() {
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+    glEnable(GL_DEPTH_TEST); //kedalaman cahaya
+    glEnable(GL_LIGHTING); //megaktifkan pencahyaan
+    glEnable(GL_LIGHT0); 
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0, 1.0, 1.0, 100.0);
+    gluPerspective(45.0, 1.0, 1.0, 100.0); // 45 derajat
     glMatrixMode(GL_MODELVIEW);
-
-    // Pencahayaan
+ 
     GLfloat lightPos[] = {3.0f, 3.0f, 3.0f, 1.0f};
     GLfloat lightAmbient[] = {0.2f, 0.2f, 0.2f, 1.0f};
     GLfloat lightDiffuse[] = {0.8f, 0.8f, 0.8f, 1.0f};
@@ -319,11 +338,11 @@ void init() {
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpecular);
 
-    // Properti material default
+    // Properti pencahayaan
     GLfloat matAmbient[] = {0.8f, 0.8f, 0.8f, 1.0f};
     GLfloat matDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat matSpecular[] = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat matShininess[] = {50.0f};
+    GLfloat matShininess[] = {50.0f}; //tingkat kilauan
 
     glMaterialfv(GL_FRONT, GL_AMBIENT, matAmbient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiffuse);
@@ -337,12 +356,12 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Donat, Lolipop, Apel & Jeruk");
+    glutCreateWindow("Food_3D");
 
     init();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
-    glutTimerFunc(16, update, 0);
+    glutTimerFunc(15, animasi, 0);
     glutMainLoop();
     return 0;
 }
