@@ -26,7 +26,7 @@ void drawLolipop() {
 
     // Kepala lolipop
     GLfloat headColor[] = {1.0f, 0.0f, 0.0f}; // Warna merah kepala lolipop
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, headColor);
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, headColor); //Parameter permukaan objek terhadap cahaya
     glTranslatef(0.0f, 0.5f, 0.0f);
     glutSolidSphere(0.4, 32, 32);
     
