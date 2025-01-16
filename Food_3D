@@ -1,7 +1,7 @@
 #include <GL/glut.h>
 #include <stdbool.h>
 
-//Kamilaeni
+//------------------------------------------------------ Kamilaeni -----------------------------------------------------------------------
 float angle = 0.0f; // Sudut rotasi
 float rotationSpeed = 4.0f; // Kecepatan rotasi
 float cameraPosX = 5.0f; // Posisi X kamera
@@ -20,7 +20,7 @@ void drawDonut() {
     glPopMatrix();
 }
 
-//Anyelir
+//------------------------------------------------------ Anyelir ---------------------------------------------------------------------------
 // Fungsi untuk menggambar lolipop
 void drawLolipop() {
     glPushMatrix(); 
@@ -56,7 +56,7 @@ void drawDaun() {
     glPopMatrix();
 }
 
-//Kamilaeni
+//------------------------------------------------------------- Kamilaeni -------------------------------------------------------------
 // Fungsi untuk menggambar apel
 void drawApple() {
     glPushMatrix();
@@ -85,19 +85,19 @@ void drawApple() {
     glPopMatrix();
 }
 
-//Anyelir
+//--------------------------------------------------------------- Anyelir -----------------------------------------------------------
 // Fungsi untuk menggambar jeruk
-void drawOrange() {
+void drawJeruk() {
     glPushMatrix();
 
     // Badan jeruk
-    GLfloat orangeColor[] = {1.0f, 0.5f, 0.0f}; // Warna oranye
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, orangeColor);
+    GLfloat jerukColor[] = {1.0f, 0.5f, 0.0f}; // Warna oranye
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, jerukColor);
     glutSolidSphere(0.4, 32, 32);
 
     // Tangkai jeruk
-    GLfloat stemColor[] = {0.4f, 0.2f, 0.0f}; // Warna coklat
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, stemColor);
+    GLfloat batangColor[] = {0.4f, 0.2f, 0.0f}; // Warna coklat
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, batangColor);
     glPushMatrix();
     glTranslatef(0.0f, 0.4f, 0.0f);
     glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
@@ -114,7 +114,7 @@ void drawOrange() {
     glPopMatrix();
 }
 
-//Kamilaeni
+//---------------------------------------------------------------- Kamilaeni ----------------------------------------------------------
 // Fungsi untuk menggambar sumbu kartesius
 void drawCartecius() {
     if (!showCartecius) return; // Jika showCartecius false, hilang
@@ -141,8 +141,8 @@ void drawCartecius() {
     glEnable(GL_LIGHTING); // Aktifkan kembali pencahayaan
 }
 
-//Anyelir
-// Fungsi untuk menggambar latar belakang dengan dinding papan kayu dan lantai kotak-kotak
+//------------------------------------------------------------ Anyelir --------------------------------------------------------------------
+// Fungsi untuk menggambar latar belakang
 void drawBackground() {
     glDisable(GL_LIGHTING); // Nonaktifkan pencahayaan untuk latar belakang
 
@@ -163,7 +163,7 @@ void drawBackground() {
     }
 
     // Warna papan kayu coklat
-    GLfloat woodColor[] = {0.55f, 0.27f, 0.07f}; // Warna coklat kayu
+    GLfloat PapanColor[] = {0.55f, 0.27f, 0.07f}; // Warna coklat kayu
 
     // Gambar dinding (papan kayu vertikal)
     for (float i = -10.0f; i <= 10.0f; i += 1.0f) { 
@@ -171,7 +171,7 @@ void drawBackground() {
         glPushMatrix();
         glTranslatef(i, 0.0f, -10.0f); // Posisi papan belakang menyentuh lantai
         glScalef(1.0f, 10.0f, 0.1f);    // Skala papan
-        glColor3fv(woodColor);
+        glColor3fv(PapanColor);
         glutSolidCube(1.0f);
         glPopMatrix();
 
@@ -179,7 +179,7 @@ void drawBackground() {
         glPushMatrix();
         glTranslatef(i, 0.0f, 10.0f); // Posisi papan depan menyentuh lantai
         glScalef(1.0f, 10.0f, 0.1f);    // Skala papan
-        glColor3fv(woodColor);
+        glColor3fv(PapanColor);
         glutSolidCube(1.0f);
         glPopMatrix();
     }
@@ -189,7 +189,7 @@ void drawBackground() {
         glPushMatrix();
         glTranslatef(-10.0f, 0.0f, i); // Posisi papan kiri menyentuh lantai
         glScalef(0.1f, 10.0f, 1.0f);    // Skala papan
-        glColor3fv(woodColor);
+        glColor3fv(PapanColor);
         glutSolidCube(1.0f);
         glPopMatrix();
 
@@ -197,7 +197,7 @@ void drawBackground() {
         glPushMatrix();
         glTranslatef(10.0f, 0.0f, i); // Posisi papan kanan menyentuh lantai
         glScalef(0.1f, 10.0f, 1.0f);    // Skala papan
-        glColor3fv(woodColor);
+        glColor3fv(PapanColor);
         glutSolidCube(1.0f);
         glPopMatrix();
     }
@@ -205,16 +205,16 @@ void drawBackground() {
     // Langit-langit (seperti papan)
     for (float i = -10.0f; i <= 10.0f; i += 1.0f) {
         glPushMatrix();
-        glTranslatef(i, 10.0f, 0.0f); // Posisi papan langit-langit di atas objek
+        glTranslatef(i, 5.0f, 0.0f); // Posisi papan langit-langit di atas objek
         glScalef(1.0f, 0.1f, 20.0f);    // Skala papan
-        glColor3fv(woodColor);
+        glColor3fv(PapanColor);
         glutSolidCube(1.0f);
         glPopMatrix();
     }
     glEnable(GL_LIGHTING); // Aktifkan kembali pencahayaan
 }
 
-//Kamilaeni
+//--------------------------------------------- Kamilaeni ----------------------------------------------------
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -255,14 +255,14 @@ void display() {
 	glTranslatef(3.0f, 0.0f, 0.0f);
 	glRotatef(angle, 0.0f, 1.0f, 0.0f);
 	glScalef(scaleFactor, scaleFactor, scaleFactor); // Terapkan skala
-	drawOrange();
+	drawJeruk();
 	glPopMatrix();
 	
 	glPopMatrix();
 	glutSwapBuffers();
 }
 
-//Anyelir
+//------------------------------------------------------- Anyelir --------------------------------------------------------
 // Fungsi untuk memperbarui animasi saat berputar
 void animasi(int value) {
     angle += rotationSpeed; // Tambah sudut rotasi
@@ -273,7 +273,7 @@ void animasi(int value) {
     glutTimerFunc(15, animasi, 0); // Memanggil fungsi ini lagi setelah 16 ms
 }
 
-//Kamilaeni
+//------------------------------------------------------ Kamilaeni ---------------------------------------------------------
 // Fungsi untuk menangani input keyboard
 void keyboard(unsigned char key, int x, int y) {
     switch (key) {
@@ -315,7 +315,7 @@ void keyboard(unsigned char key, int x, int y) {
     glutPostRedisplay(); // Minta redisplay setelah perubahan
 }
 
-//Anyelir
+//------------------------------------------------------------ Anyelir ---------------------------------------------------
 // Inisialisasi
 void init() {
     glEnable(GL_DEPTH_TEST); //kedalaman cahaya
@@ -350,7 +350,7 @@ void init() {
     glMaterialfv(GL_FRONT, GL_SHININESS, matShininess);
 }
 
-//Kamilaeni
+//----------------------------------------------------------- Kamilaeni --------------------------------------------------------
 // Fungsi utama
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
@@ -363,5 +363,5 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(keyboard);
     glutTimerFunc(15, animasi, 0);
     glutMainLoop();
-    return 0;
+    return 0;
 }
